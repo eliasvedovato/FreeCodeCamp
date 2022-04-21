@@ -364,6 +364,38 @@ cc(2); cc(3); cc(7); cc('K'); cc('A');
 
 console.log(count);
 
-/*
+/* Los objetos son similares a los arreglos (arrays), excepto que en lugar de usar índices para acceder y modificar sus datos, 
+accedes a los datos en objetos a través de propiedades (properties). */
+
+const card = {
+  make: "Ford",
+  5: "five",
+  "model": "focus"
+};
+
+
+/* Otro uso de la notación de corchetes en objetos es acceder a una propiedad que está almacenada como el valor de una variable. 
+Esto puede ser muy útil para iterar a través de las propiedades de un objeto o para acceder a una tabla de búsqueda.
 
 */
+
+const dogs = {
+    Fido: "Mutt",
+    Hunter: "Doberman",
+    Snoopie: "Beagle"
+};
+  
+const myDog = "Hunter";
+const myBreed = dogs[myDog];
+console.log(myBreed);
+
+// Puedes actualizar sus propiedades en cualquier momento tal y como actualizarías cualquier otra variable
+miPerro["name"] = "Happy Coder";
+miPerro.name = "Happy Coder";
+
+// Puedes añadir nuevas propiedades a los objetos de JavaScript existentes de la misma manera que los modificarías
+ourDog.bark = "bow-wow";
+
+// También podemos eliminar propiedades de objetos de esta forma:
+delete ourDog.bark;
+
