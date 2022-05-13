@@ -373,11 +373,8 @@ const card = {
   "model": "focus"
 };
 
-
 /* Otro uso de la notación de corchetes en objetos es acceder a una propiedad que está almacenada como el valor de una variable. 
-Esto puede ser muy útil para iterar a través de las propiedades de un objeto o para acceder a una tabla de búsqueda.
-
-*/
+Esto puede ser muy útil para iterar a través de las propiedades de un objeto o para acceder a una tabla de búsqueda */
 
 const dogs = {
     Fido: "Mutt",
@@ -398,4 +395,189 @@ ourDog.bark = "bow-wow";
 
 // También podemos eliminar propiedades de objetos de esta forma:
 delete ourDog.bark;
+
+/** Verifica las propiedades de un objeto
+
+A veces es útil comprobar si existe o no la propiedad de un objeto dado. Podemos utilizar el método .hasOwnProperty(propname) para 
+determinar si un objeto tiene una propiedad con ese nombre. .hasOwnProperty() devuelve true o false si se encuentra la propiedad o no */
+
+const myObj = {
+  top: "hat",
+  bottom: "pants"
+};
+
+myObj.hasOwnProperty("top");
+myObj.hasOwnProperty("middle");
+
+// El primer hasOwnProperty devuelve true, mientras que el segundo devuelve false.
+
+/* Accede a objetos anidados
+
+Se puede acceder a las sub propiedades de objetos encadenando la notación de puntos o corchetes */
+
+const ourStorage = {
+    "desk": {
+      "drawer": "stapler"
+    },
+    "cabinet": {
+      "top drawer": { 
+        "folder1": "a file",
+        "folder2": "secrets"
+      },
+      "bottom drawer": "soda"
+    }
+  };
+  
+  ourStorage.cabinet["top drawer"].folder2;
+  ourStorage.desk.drawer;
+
+/* Accede a arreglos anidados
+
+Como hemos visto en ejemplos anteriores, los objetos pueden contener tanto objetos anidados como así también arreglos anidados. 
+De manera similar a como se accede a los objetos anidados, la notación de corchetes de arreglos puede ser encadenada para 
+acceder a arreglos anidados. */
+
+const ourPets = [
+    {
+      animalType: "cat",
+      names: [
+        "Meowzer",
+        "Fluffy",
+        "Kit-Cat"
+      ]
+    },
+    {
+      animalType: "dog",
+      names: [
+        "Spot",
+        "Bowser",
+        "Frankie"
+      ]
+    }
+  ];
+  
+  ourPets[0].names[1];
+  ourPets[1].names[0];
+
+// ourPets[0].names[1] sería la cadena Fluffy, y ourPets[1].names[0] sería la cadena Spot.
+
+/**Colección de discos
+
+Se te da un objeto literal que representa una parte de tu colección de álbumes musicales. Cada álbum tiene 
+un número de id único como clave y varias otras propiedades. No todos los álbumes tienen una información completa.
+
+Empiezas con una función updateRecords la cual toma un objeto literal, records, que contiene el álbum musical 
+de la colección, un id, prop (como artist o tracks), y value. Completa la función usando las reglas siguientes 
+para modificar el objeto pasado a la función.
+
+    Tu función siempre debe devolver el objeto de colección de registros completo.
+    Si prop no es tracks y value no es una cadena vacía, actualiza o establece la propiedad prop del album a value.
+    Si prop es tracks pero el álbum no tiene una propiedad tracks, crea un arreglo vacío y agrégale value a él.
+    Si prop es tracks y value no es una cadena vacía, agrega value al final del arreglo de tracks existentes del álbum.
+    Si value es una cadena vacía, elimina esa propiedad prop del álbum. */
+
+// Configuración
+const recordCollection = {
+    2548: {
+      albumTitle: 'Slippery When Wet',
+      artist: 'Bon Jovi',
+      tracks: ['Let It Rock', 'You Give Love a Bad Name']
+    },
+    2468: {
+      albumTitle: '1999',
+      artist: 'Prince',
+      tracks: ['1999', 'Little Red Corvette']
+    },
+    1245: {
+      artist: 'Robert Palmer',
+      tracks: []
+    },
+    5439: {
+      albumTitle: 'ABBA Gold'
+    }
+  };
+  
+  // Cambia solo el código debajo de esta línea
+  function updateRecords(records, id, prop, value) {
+  
+    if(value === ""){
+        delete records[id][prop]
+    }else if(prop == "tracks"){
+  
+        if(records[id].hasOwnProperty(prop)){
+            records[id][prop].push(value)
+        }else{
+            records[id][prop] = [];
+            records[id][prop].push(value) 
+        }
+
+    }else{
+        records[id][prop] = value
+    }
+
+    return records;
+  }
+  
+updateRecords(recordCollection, 5439, "artist", "ABBA")
+updateRecords(recordCollection, 5439, "tracks", "Take a Chance on Me")
+updateRecords(recordCollection, 2548, "artist", "")
+updateRecords(recordCollection, 1245, "tracks", "Addicted to Love")
+updateRecords(recordCollection, 2468, "tracks", "Free")
+updateRecords(recordCollection, 1245, "albumTitle", "Riptide")
+
+/** Itera con el bucle "while" de JavaScript
+
+Puedes ejecutar el mismo código múltiples veces usando un bucle.
+
+El primer tipo de bucle que aprenderemos se llama bucle while porque ejecuta una condición específica 
+mientras esta sea verdadera, y se detiene una vez que esa condición ya no sea verdadera */
+
+const ourArray = [];
+let i = 0;
+
+while (i < 5) {
+  ourArray.push(i);
+  i++;
+}
+
+// En el ejemplo de código anterior, el bucle while se ejecutará 5 veces y añadirá los números de 0 a 4 a ourArray
+
+// Agrega los números de 5 a 0 (inclusivo) en orden descendente a myArray usando un bucle while
+
+const myArray = [];
+
+let e = 5
+
+while (e >= 0){
+  myArray.push(e)
+  e--
+}
+
+/** El tipo más común de bucle de JavaScript se llama bucle for porque se ejecuta "por" un número específico de veces 
+ * 
+ * Usa un bucle for para empujar los valores desde el 1 al 5 en myArray
+*/
+
+const array = [];
+
+for (let i = 1; i < 6; i++) {
+  myArray.push(i);
+}
+
+/** Los bucles "for" no tienen que iterar de uno en uno a la vez. Al cambiar nuestra final-expression (expresión final), 
+ * podemos contar con números pares */
+
+const ourArray = [];
+
+for (let i = 0; i < 10; i += 2) {
+    ourArray.push(i);
+}
+
+// Inserta los números impares desde 1 hasta 9 en anotherArray utilizando un bucle for
+
+const anotherArray = [];
+
+for (let i = 1; i < 10; i += 2) {
+  anotherArray.push(i);
+}
 
