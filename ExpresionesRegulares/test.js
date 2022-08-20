@@ -99,41 +99,80 @@ shortHand.test(varNames);
 
 // Las cuatro llamadas a test devolverán true.
 
-/* Utiliza la clase de caracteres abreviada \w 
-para contar el número de caracteres alfanuméricos en varias citas y cadenas. */
+/* Puedes especificar el número inferior y superior de patrones utilizando especificadores de cantidad. 
+Para los especificadores de cantidad utilizamos llaves ({ y }). Pon dos números entre las llaves - para 
+el número inferior y superior de patrones. 
 
-let quoteSample = "The five boxing wizards jump quickly.";
-let alphabetRegexV2 = /\w/g; // Cambia esta línea
-let result = quoteSample.match(alphabetRegexV2).length;
-console.log(result)
+Modifica la expresión regular ohRegex para que coincida con toda la frase Oh no solo cuando tenga de 3 a 6 letras h. */
 
-/* Puedes buscar lo contrario de \w con \W. Ten en cuenta, el patrón contrario usa letra 
-mayúscula. Este atajo es lo mismo que [^A-Za-z0-9_]. */
+let ohStr = "Ohhh no";
+let ohRegex = /Oh{3,6}\sno/; // Cambia esta línea
+let result = ohRegex.test(ohStr);
 
-let shortHand = /\W/;
-let numbers = "42%";
-let sentence = "Coding!";
-numbers.match(shortHand); // devuelve el valor ["%"]
-sentence.match(shortHand); // devuelve ["!"]
+/* Puedes especificar el número inferior y superior de patrones mediante especificadores de cantidad 
+utilizando llaves. A veces sólo se quiere especificar el número inferior de patrones sin tener un límite superior.
 
-/* Has aprendido atajos para patrones de cadenas comunes como los alfanuméricos. Otro 
-patrón común es buscar solo dígitos o números.
+Para especificar sólo el número inferior de patrones, mantén el primer número seguido de una coma.
 
-El atajo para buscar caracteres de dígitos es \d, con una d minúscula. Esto es igual a 
-la clase de caracteres [0-9], la cual busca un solo carácter de cualquier número 
-entre cero y nueve */  
+Por ejemplo, para hacer coincidir solo con la cadena hah cuando la letra a aparezca al menos 3 veces, 
+la expresión regular sería /ha{3,}h/. */
 
-let movieName = "2001: A Space Odyssey";
-let numRegex = /\d/g; // Cambia esta línea
-let result = movieName.match(numRegex).length;
+let A4 = "haaaah";
+let A2 = "haah";
+let A100 = "h" + "a".repeat(100) + "h";
+let multipleA = /ha{3,}h/;
+multipleA.test(A4); //true
+multipleA.test(A2); //false
+multipleA.test(A100); //true
 
-/* También puedes buscar caracteres que no sean dígitos usando un atajo similar que 
-utilice una D mayúscula en su lugar.
+/* Para especificar un cierto número de patrones, simplemente pon ese número entre corchetes.
 
-El atajo para buscar caracteres que no sean dígitos es \D. Esto es igual a la clase de 
-caracteres [^0-9], el cual busca un único carácter que no sea un número entre cero y nueve. */
+Por ejemplo, para que coincida con la palabra hah solo con la letra a 3 veces, tu expresión regular sera /ha{3}h/. */
 
-let movieName = "2001: A Space Odyssey";
-let noNumRegex = /\D/g; // Cambia esta línea
-let result = movieName.match(noNumRegex).length;
+let timStr = "Timmmmber";
+let timRegex = /Tim{4}ber/
+let result = timRegex.test(timStr); //true
 
+/* A veces los patrones que quieres buscar pueden tener partes que pueden o no existir. Sin embargo, podría ser 
+importante buscarlos de todos maneras.
+
+Puedes especificar la posible existencia de un elemento con un signo de interrogación, ?. Esto comprueba 
+cero o uno de los elementos precedentes. Puedes pensar que este símbolo dice que el elemento anterior es opcional.
+
+Por ejemplo, hay ligeras diferencias en inglés americano y británico y puedes usar el signo de interrogación 
+para coincidir con ambas ortografías. */
+
+let american = "color";
+let british = "colour";
+let rainbowRegex= /colou?r/;
+rainbowRegex.test(american);
+rainbowRegex.test(british);
+
+let favWord = "favorite";
+let favRegex = /favou?rite/; // Cambia esta línea
+let result = favRegex.test(favWord);
+
+/* Utiliza los lookaheads en el pwRegex para que coincida con las contraseñas que tengan más 
+de 5 caracteres y dos dígitos consecutivos. */
+
+let sampleWord = "astronaut";
+let pwRegex = /(?=\w{5,}\w)(?=\D*\d{2})/
+let result = pwRegex.test(sampleWord); //false
+
+/* Corrige la expresión regular para que compruebe los nombres de Franklin Roosevelt o Eleanor 
+Roosevelt de una manera sensible a mayúsculas y minúsculas y haciendo concesiones para los segundos nombres.
+
+Luego, corrige el código para que la expresión regular que has creado se compruebe con myString y 
+devuelva true o false dependiendo de si la expresión regular coincide. */
+
+let myString = "Eleanor J. Roosevelt";
+let myRegex = /(Franklin|Eleanor).*Roosevelt/; // Cambia esta línea
+let result = myRegex.test(myString); // Cambia esta línea
+// Después de pasar el desafío experimenta con myString y observa cómo funciona la agrupación
+
+/* Utiliza los grupos de captura en reRegex para que coincida con una cadena que conste sólo 
+del mismo número repetido exactamente tres veces separado por espacios. */
+
+let repeatNum = "42 42 42";
+let reRegex = /^(\d+)\s\1\s\1$/; // Cambia esta línea
+let result = reRegex.test(repeatNum);

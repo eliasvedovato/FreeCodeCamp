@@ -139,3 +139,81 @@ al coincidir con la expresión regular ajustada de /t[a-z]*?i/ devuelve ["ti"]. 
 let text = "<h1>Winter is coming</h1>";
 let myRegex = /<.*?>/; // Cambia esta línea
 let result = text.match(myRegex);
+
+/* Utiliza la clase de caracteres abreviada \w 
+para contar el número de caracteres alfanuméricos en varias citas y cadenas. */
+
+let quoteSample = "The five boxing wizards jump quickly.";
+let alphabetRegexV2 = /\w/g; // Cambia esta línea
+let result = quoteSample.match(alphabetRegexV2).length;
+console.log(result)
+
+/* Puedes buscar lo contrario de \w con \W. Ten en cuenta, el patrón contrario usa letra 
+mayúscula. Este atajo es lo mismo que [^A-Za-z0-9_]. */
+
+let shortHand = /\W/;
+let numbers = "42%";
+let sentence = "Coding!";
+numbers.match(shortHand); // devuelve el valor ["%"]
+sentence.match(shortHand); // devuelve ["!"]
+
+/* Has aprendido atajos para patrones de cadenas comunes como los alfanuméricos. Otro 
+patrón común es buscar solo dígitos o números.
+
+El atajo para buscar caracteres de dígitos es \d, con una d minúscula. Esto es igual a 
+la clase de caracteres [0-9], la cual busca un solo carácter de cualquier número 
+entre cero y nueve */  
+
+let movieName = "2001: A Space Odyssey";
+let numRegex = /\d/g; // Cambia esta línea
+let result = movieName.match(numRegex).length;
+
+/* También puedes buscar caracteres que no sean dígitos usando un atajo similar que 
+utilice una D mayúscula en su lugar.
+
+El atajo para buscar caracteres que no sean dígitos es \D. Esto es igual a la clase de 
+caracteres [^0-9], el cual busca un único carácter que no sea un número entre cero y nueve. */
+
+let movieName = "2001: A Space Odyssey";
+let noNumRegex = /\D/g; // Cambia esta línea
+let result = movieName.match(noNumRegex).length;
+
+/* Puedes buscar los espacios en blanco usando \s que es una s minúscula. Este patrón no 
+solo coincide con los espacios en blanco, también con los caracteres de retorno de carro, 
+tabulaciones, alimentación de formulario y saltos de línea. Puedes pensar que es similar 
+a las clases de caracteres [ \r\t\f\n\v]. */
+
+let whiteSpace = "Whitespace. Whitespace everywhere!"
+let spaceRegex = /\s/g;
+whiteSpace.match(spaceRegex); // debe devolver [" ", " "].
+
+/* Busca caracteres que no sean espacios en blanco usando \S, la cual es una s mayúscula. 
+Este patrón no coincidirá con los caracteres de espacios en blanco, retorno de carro, tabulaciones, 
+alimentación de formulario y saltos de línea. Puedes pensar que es similar a la clase de caracteres [^ \r\t\f\n\v]. */
+
+let whiteSpace = "Whitespace. Whitespace everywhere!"
+let nonSpaceRegex = /\S/g;
+whiteSpace.match(nonSpaceRegex).length; // .length sería 32
+
+// Digamos que quieres hacer coincidir una palabra que aparece varias veces como la siguiente.
+
+let repeatStr = "row row row your boat";
+
+/* Podrías usar /row row row/, pero ¿qué pasa si no conoces la palabra específica que se repite? 
+Los grupos de captura pueden utilizarse para encontrar subcadenas repetidas.
+
+Los grupos de captura se construyen encerrando entre paréntesis el patrón de expresión regular a 
+capturar. En este caso, el objetivo es capturar una palabra formada por caracteres alfanuméricos, 
+por lo que el grupo de captura será \w+ encerrado entre paréntesis: /(\w+)/.
+
+La subcadena que coincide con el grupo se guarda en una "variable" temporal, a la que se puede 
+acceder dentro de la misma expresión regular utilizando una barra invertida y el número del grupo 
+de captura (por ejemplo, \1). Los grupos de captura se numeran automáticamente por la posición de 
+sus paréntesis de apertura (de izquierda a derecha), empezando por el 1.
+
+El siguiente ejemplo encuentra cualquier palabra que aparezca tres veces separada por un espacio: */
+
+let repeatRegex = /(\w+) \1 \1/;
+repeatRegex.test(repeatStr); // Returns true
+repeatStr.match(repeatRegex); // Returns ["row row row", "row"]
+
