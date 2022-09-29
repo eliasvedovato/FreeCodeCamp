@@ -11,19 +11,14 @@ will come before a. If compareFunction(a,b) returns a value equal
 to 0 for two elements a and b, then a and b will remain unchanged. */
 
 function alphabeticalOrder(arr) {
-	// Only change code below this line
-
 	return arr.sort(function (a, b) {
 		return a === b ? 0 : a < b ? -1 : 1
 	})
-	// Only change code above this line
 }
 
 alphabeticalOrder(['a', 'd', 'c', 'a', 'z', 'g'])
 
 var array = [1, 12, 21, 2];
-
-// Only change code below this line.
 
 array.sort(function(a,b){
   return b-a;
